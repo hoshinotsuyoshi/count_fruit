@@ -51,3 +51,11 @@ module CountFruit
 
 end
 
+#handler
+File.open("./fruits.log","r"){|f|f.read}.split("\n").each do |string|
+  CountFruit.str = string
+  puts CountFruit.solve
+end
+# -> 3 6 3 5 4
+
+
