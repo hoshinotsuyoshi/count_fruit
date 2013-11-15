@@ -1,6 +1,6 @@
 module CountFruit
   extend self
-  attr_accessor :string
+  attr_accessor :string,:delimiter
   Delimiters = {
     "{" => ["{","}"],
     "(" => ["(",")"],
@@ -13,10 +13,6 @@ module CountFruit
   }
   def init(string,delimiter)
     @string = @inner_string = string
-    @delimiter = delimiter
-  end
-
-  def delimiter=(delimiter)
     @delimiter = delimiter
   end
 
