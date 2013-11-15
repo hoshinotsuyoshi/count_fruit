@@ -1,5 +1,5 @@
 # coding: utf-8
-require './fruit'
+require './count_fruit'
 
 describe CountFruit do
   it "split" do
