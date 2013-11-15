@@ -15,6 +15,7 @@ describe CountFruit do
     CountFruit.string = string
     CountFruit.delimiter = delimiter
     expect(
+      #
       CountFruit.split
     ).to eq ["apple     melon aka", "tak  "]
   end

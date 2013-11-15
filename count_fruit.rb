@@ -20,16 +20,10 @@ module CountFruit
     @string.gsub(ReplaceRegExp[@delimiter]," ")
   end
 
-  #separate_using_delimiter
+  #strings_separated_by_delimiter
   def split
-    #open_delimiterでsplit
-    array = inner_string.split(open_delimiter)
-    #最初の要素は不要
-    array.shift
-    #それぞれの要素において閉じ括弧が無いものを削除
-    array.select!{|e|e.include? close_delimiter}
-    #閉じ括弧でsplitして最初の要素を取り出す
-    array.map{|e|e.split(close_delimiter).first}
+    open,close = "\\" + open_delimiter, "\\" + close_delimiter
+    inner_string.scan(/#{open}[^#{open}]*?#{close}/).map{|e|e.gsub(/[#{open}#{close}]/,"")} 
   end
 
   #separate_by_space -> to_fruits_array
