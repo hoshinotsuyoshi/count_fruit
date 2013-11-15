@@ -3,16 +3,16 @@ require './fruit'
 
 describe CountFruit do
   it "split" do
-    str,cutter = "{apple melon}","{"
-    CountFruit.init(str,cutter)
+    str,delimiter = "{apple melon}","{"
+    CountFruit.init(str,delimiter)
     expect(
       CountFruit.split
     ).to eq ["apple melon"]
   end
   it "split" do
-    str,cutter = "{apple melon}","{"
+    str,delimiter = "{apple melon}","{"
     CountFruit.str = str
-    CountFruit.cutter = cutter
+    CountFruit.delimiter = delimiter
     expect(
       CountFruit.split
     ).to eq ["apple melon"]
@@ -21,29 +21,29 @@ end
 
 describe CountFruit do
   it "cut" do
-    str,cutter = "{apple melon}","{"
-    CountFruit.init(str,cutter)
+    str,delimiter = "{apple melon}","{"
+    CountFruit.init(str,delimiter)
     expect(
       CountFruit.cut
     ).to eq [["apple","melon"]]
   end
   it "cut" do
-    str,cutter = "{apple melon aka}{tak}","{"
-    CountFruit.init(str,cutter)
+    str,delimiter = "{apple melon aka}{tak}","{"
+    CountFruit.init(str,delimiter)
     expect(
       CountFruit.cut
     ).to eq [ ["apple", "melon", "aka"], ["tak"]]
   end
   it "cut" do
-    str,cutter = "{apple   melon aka}{tak  }","{"
-    CountFruit.init(str,cutter)
+    str,delimiter = "{apple   melon aka}{tak  }","{"
+    CountFruit.init(str,delimiter)
     expect(
       CountFruit.cut
     ).to eq [["apple", "melon", "aka"], ["tak"]]
   end
   it "cut" do
-    str,cutter = "xxx {yy zz aa bb{apple()   melon aka}{tak  }xxx yyy","{"
-    CountFruit.init(str,cutter)
+    str,delimiter = "xxx {yy zz aa bb{apple()   melon aka}{tak  }xxx yyy","{"
+    CountFruit.init(str,delimiter)
     expect(
       CountFruit.cut
     ).to eq [["apple", "melon", "aka"], ["tak"]]
@@ -55,21 +55,21 @@ describe CountFruit do
     end
     # "("
     it "cut" do
-      CountFruit.cutter = "("
+      CountFruit.delimiter = "("
       expect(
         CountFruit.cut
       ).to eq  [[], ["melon", "apple", "apple", "melon", "strawberry"]]
     end
     # "{"
     it "cut" do
-      CountFruit.cutter = "{"
+      CountFruit.delimiter = "{"
       expect(
         CountFruit.cut
       ).to eq  [["apple"], ["apple", "apple"]]
     end
     # "("
     it "cut" do
-      CountFruit.cutter = "["
+      CountFruit.delimiter = "["
       expect(
         CountFruit.cut
       ).to eq []
@@ -81,19 +81,19 @@ describe CountFruit do
     end
     # "("
     it "max_with '('" do
-      CountFruit.cutter = "("
+      CountFruit.delimiter = "("
       expect(
         CountFruit.max
       ).to eq 0
     end
     it "max_with '{'" do
-      CountFruit.cutter = "{"
+      CountFruit.delimiter = "{"
       expect(
         CountFruit.max
       ).to eq 4
     end
     it "max_with '['" do
-      CountFruit.cutter = "["
+      CountFruit.delimiter = "["
       expect(
         CountFruit.max
       ).to eq 0
@@ -109,19 +109,19 @@ describe CountFruit do
       CountFruit.str = "[apple apple }{melon](strawberry}(melon]]"
     end
     it "max_with '('" do
-      CountFruit.cutter = "("
+      CountFruit.delimiter = "("
       expect(
         CountFruit.max
       ).to eq 0
     end
     it "max_with '{'" do
-      CountFruit.cutter = "{"
+      CountFruit.delimiter = "{"
       expect(
         CountFruit.max
       ).to eq 2
     end
     it "max_with '['" do
-      CountFruit.cutter = "["
+      CountFruit.delimiter = "["
       expect(
         CountFruit.max
       ).to eq 3
@@ -137,19 +137,19 @@ describe CountFruit do
       CountFruit.str = "({}apple) melon strawberry{melon(apple apple) melon strawberry}"
     end
     it "max_with '('" do
-      CountFruit.cutter = "("
+      CountFruit.delimiter = "("
       expect(
         CountFruit.max
       ).to eq 2
     end
     it "max_with '{'" do
-      CountFruit.cutter = "{"
+      CountFruit.delimiter = "{"
       expect(
         CountFruit.max
       ).to eq 5
     end
     it "max_with '['" do
-      CountFruit.cutter = "["
+      CountFruit.delimiter = "["
       expect(
         CountFruit.max
       ).to eq 0

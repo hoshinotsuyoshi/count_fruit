@@ -1,7 +1,7 @@
 module CountFruit
   extend self
   attr_accessor :str
-  Cutter = {
+  Delimiter = {
     "{" => ["{","}"],
     "(" => ["(",")"],
     "[" => ["[","]"],
@@ -11,15 +11,15 @@ module CountFruit
     "(" => /[\{\}\[\]]/,
     "[" => /[\(\)\{\}]/,
   }
-  def init(str,cutter)
+  def init(str,delimiter)
     @str = @inner_str = str
-    @cutter = cutter
-    @cut_begin,@cut_end = Cutter[@cutter]
+    @delimiter = delimiter
+    @cut_begin,@cut_end = Delimiter[@delimiter]
   end
 
-  def cutter=(cutter)
-    @cutter = cutter
-    @cut_begin,@cut_end = Cutter[@cutter]
+  def delimiter=(delimiter)
+    @delimiter = delimiter
+    @cut_begin,@cut_end = Delimiter[@delimiter]
   end
 
   def cut
@@ -35,7 +35,7 @@ module CountFruit
   end
 
   def replace
-    @inner_str = @str.gsub(ReplaceRegExp[@cutter]," ")
+    @inner_str = @str.gsub(ReplaceRegExp[@delimiter]," ")
   end
 
   def max
@@ -44,7 +44,7 @@ module CountFruit
 
   def solve
     ["[","(","{"].map{|dilimiter|
-      self.cutter = dilimiter
+      self.delimiter = dilimiter
       max
     }.max
   end
