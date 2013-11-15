@@ -14,12 +14,18 @@ module CountFruit
   def init(string,delimiter)
     @string = @inner_string = string
     @delimiter = delimiter
-    @cut_begin,@cut_end = Delimiters[@delimiter]
   end
 
   def delimiter=(delimiter)
     @delimiter = delimiter
-    @cut_begin,@cut_end = Delimiters[@delimiter]
+  end
+
+  def open_delimiter
+    Delimiters[@delimiter].first
+  end
+
+  def close_delimiter
+    Delimiters[@delimiter].last
   end
 
   def cut
@@ -28,10 +34,10 @@ module CountFruit
   end
 
   def split
-    array = @inner_string.split(@cut_begin)
+    array = @inner_string.split(open_delimiter)
     array.shift
-    array.select!{|e|e.include? @cut_end}
-    array.map{|e|e.split(@cut_end).first}
+    array.select!{|e|e.include? close_delimiter}
+    array.map{|e|e.split(close_delimiter).first}
   end
 
   def replace
