@@ -26,7 +26,7 @@ module FruitSolver
     }.max
   end
 
-  #private
+  private
 
   attr_accessor :delimiter
 
@@ -46,8 +46,6 @@ module FruitSolver
     open,close = "\\" + open_delimiter, "\\" + close_delimiter
     trim_other_delimiters.scan(/#{open}[^#{open}]*?#{close}/).map{|e|e[1...-1]}
   end
-
-  private
 
   # セットされているdelimiterそのものを返す
   def open_delimiter
