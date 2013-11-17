@@ -2,56 +2,55 @@
 require './count_fruit'
 
 describe CountFruit do
-  it "split" do
+  it "strings_separated_by_delimiter" do
     string,delimiter = "{apple melon}","{"
     CountFruit.string = string
     CountFruit.delimiter = delimiter
     expect(
-      CountFruit.split
+      CountFruit.strings_separated_by_delimiter
     ).to eq ["apple melon"]
   end
-  it "split" do
+  it "strings_separated_by_delimiter" do
     string,delimiter = "xx {)x {yy z)z aa bb{apple()   melon aka}{tak  }xxx yyy","{"
     CountFruit.string = string
     CountFruit.delimiter = delimiter
     expect(
-      #
-      CountFruit.split
+      CountFruit.strings_separated_by_delimiter
     ).to eq ["apple     melon aka", "tak  "]
   end
 end
 
 describe CountFruit do
-  it "cut" do
+  it "fruits_array" do
     string,delimiter = "{apple melon}","{"
     CountFruit.string = string
     CountFruit.delimiter = delimiter
     expect(
-      CountFruit.cut
+      CountFruit.fruits_array
     ).to eq [["apple","melon"]]
   end
-  it "cut" do
+  it "fruits_array" do
     string,delimiter = "{apple melon aka}{tak}","{"
     CountFruit.string = string
     CountFruit.delimiter = delimiter
     expect(
-      CountFruit.cut
+      CountFruit.fruits_array
     ).to eq [ ["apple", "melon", "aka"], ["tak"]]
   end
-  it "cut" do
+  it "fruits_array" do
     string,delimiter = "{apple   melon aka}{tak  }","{"
     CountFruit.string = string
     CountFruit.delimiter = delimiter
     expect(
-      CountFruit.cut
+      CountFruit.fruits_array
     ).to eq [["apple", "melon", "aka"], ["tak"]]
   end
-  it "cut" do
+  it "fruits_array" do
     string,delimiter = "xxx {yy zz aa bb{apple()   melon aka}{tak  }xxx yyy","{"
     CountFruit.string = string
     CountFruit.delimiter = delimiter
     expect(
-      CountFruit.cut
+      CountFruit.fruits_array
     ).to eq [["apple", "melon", "aka"], ["tak"]]
   end
   context "複雑な文字列の時" do
@@ -60,24 +59,24 @@ describe CountFruit do
       CountFruit.string = string
     end
     # "("
-    it "cut" do
+    it "fruits_array" do
       CountFruit.delimiter = "("
       expect(
-        CountFruit.cut
+        CountFruit.fruits_array
       ).to eq  [[], ["melon", "apple", "apple", "melon", "strawberry"]]
     end
     # "{"
-    it "cut" do
+    it "fruits_array" do
       CountFruit.delimiter = "{"
       expect(
-        CountFruit.cut
+        CountFruit.fruits_array
       ).to eq  [["apple"], ["apple", "apple"]]
     end
     # "("
-    it "cut" do
+    it "fruits_array" do
       CountFruit.delimiter = "["
       expect(
-        CountFruit.cut
+        CountFruit.fruits_array
       ).to eq []
     end
   end
@@ -86,22 +85,19 @@ describe CountFruit do
       CountFruit.string = "{melon (()melon strawberry)][apple}"
     end
     # "("
-    it "count_by '('" do
-      CountFruit.delimiter = "("
+    it "count by '('" do
       expect(
-        CountFruit.count
+        CountFruit.count_by_delimiter "("
       ).to eq 0
     end
     it "count_by '{'" do
-      CountFruit.delimiter = "{"
       expect(
-        CountFruit.count
+        CountFruit.count_by_delimiter "{"
       ).to eq 4
     end
     it "count_by '['" do
-      CountFruit.delimiter = "["
       expect(
-        CountFruit.count
+        CountFruit.count_by_delimiter "["
       ).to eq 0
     end
     it "solve" do
@@ -115,21 +111,18 @@ describe CountFruit do
       CountFruit.string = "[apple apple }{melon](strawberry}(melon]]"
     end
     it "count_by '('" do
-      CountFruit.delimiter = "("
       expect(
-        CountFruit.count
+        CountFruit.count_by_delimiter "("
       ).to eq 0
     end
     it "count_by '{'" do
-      CountFruit.delimiter = "{"
       expect(
-        CountFruit.count
+        CountFruit.count_by_delimiter "{"
       ).to eq 2
     end
     it "count_by '['" do
-      CountFruit.delimiter = "["
       expect(
-        CountFruit.count
+        CountFruit.count_by_delimiter "["
       ).to eq 3
     end
     it "solve" do
@@ -143,21 +136,18 @@ describe CountFruit do
       CountFruit.string = "({}apple) melon strawberry{melon(apple apple) melon strawberry}"
     end
     it "count_by '('" do
-      CountFruit.delimiter = "("
       expect(
-        CountFruit.count
+        CountFruit.count_by_delimiter "("
       ).to eq 2
     end
     it "count_by '{'" do
-      CountFruit.delimiter = "{"
       expect(
-        CountFruit.count
+        CountFruit.count_by_delimiter "{"
       ).to eq 5
     end
     it "count_by '['" do
-      CountFruit.delimiter = "["
       expect(
-        CountFruit.count
+        CountFruit.count_by_delimiter "["
       ).to eq 0
     end
     it "solve" do
