@@ -1,20 +1,21 @@
 # coding: utf-8
+# fruit_solver.rb 
 
 # usage:
 #
 # 同じディレクトリに fruits.logを配置し、
-# ruby count_fruit.rb 
+# ruby fruit_solver.rb 
 
-module CountFruit
+module FruitSolver
   extend self
 
   # interface:
   #
   # 1,スキャンする文字列をstring=でインプットし
-  # CountFruit.string = ")apple {apple }[strawberry}strawberry melon]}"
+  # FruitSolver.string = ")apple {apple }[strawberry}strawberry melon]}"
   #
   # 2,solveで最大となるfruitsの個数を返します。
-  # CountFruit.solve
+  # FruitSolver.solve
   #  # -> 3
 
   attr_accessor :string
@@ -76,7 +77,7 @@ end
 
 #handler
 File.open("./fruits.log","r"){|f|f.read}.split("\n").each do |string|
-  CountFruit.string = string
-  puts CountFruit.solve
+  FruitSolver.string = string
+  puts FruitSolver.solve
 end
 # -> 3 6 3 5 4
